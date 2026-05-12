@@ -1,558 +1,576 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sovereign Shield Technologies — Strategic Flywheel</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sovereign Shield — Strategic Flywheel</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap');
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-  body {
-    background: #07101f;
-    font-family: 'Outfit', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-    color: #f0f4f8;
-  }
+body{
+  background:#07101f;
+  font-family:'Outfit',sans-serif;
+  min-height:100vh;
+  color:#f0f4f8;
+  overflow-x:hidden;
+}
 
-  .wrap {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 36px 16px 60px;
-    position: relative;
-    overflow: hidden;
-  }
+.wrap{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:28px 12px 50px;
+  position:relative;
+}
 
-  .wrap::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #d4a843, #00d4b8, #d4a843);
-    z-index: 10;
-  }
+.wrap::before{
+  content:'';
+  position:fixed;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,#d4a843,#00d4b8,#d4a843);
+  z-index:10;
+}
 
-  .glow-bg {
-    position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 700px; height: 700px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(212,168,67,0.06) 0%, rgba(0,212,184,0.03) 45%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
+.glow{
+  position:fixed;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:800px;height:800px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(212,168,67,0.05) 0%,rgba(0,212,184,0.03) 40%,transparent 70%);
+  pointer-events:none;
+}
 
-  .header {
-    text-align: center;
-    margin-bottom: 28px;
-    position: relative;
-    z-index: 2;
-  }
+.hdr{text-align:center;margin-bottom:18px;position:relative;z-index:2}
+.hdr-title{font-family:'Playfair Display',serif;font-size:clamp(18px,4.5vw,28px);color:#d4a843;letter-spacing:1px;margin-bottom:4px}
+.hdr-sub{font-size:12px;color:#6b8099;font-weight:300;letter-spacing:1px}
+.hdr-co{font-size:10px;color:#8a6820;letter-spacing:2px;text-transform:uppercase;margin-top:3px}
 
-  .header-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(20px, 5vw, 32px);
-    color: #d4a843;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-  }
+.wheel-wrap{
+  position:relative;
+  width:min(560px,98vw);
+  height:min(560px,98vw);
+  margin:0 auto;
+  z-index:2;
+}
 
-  .header-sub {
-    font-size: 13px;
-    color: #6b8099;
-    font-weight: 300;
-    letter-spacing: 1px;
-  }
+svg{overflow:visible}
 
-  .header-co {
-    font-size: 10px;
-    color: #8a6820;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    margin-top: 5px;
-  }
+.tap-hint{text-align:center;font-size:11px;color:#6b8099;margin-top:8px;letter-spacing:1px;z-index:2;position:relative}
 
-  .wheel-wrap {
-    position: relative;
-    width: min(520px, 95vw);
-    height: min(520px, 95vw);
-    margin: 0 auto;
-    z-index: 2;
-  }
+.info{
+  margin-top:16px;
+  width:min(560px,98vw);
+  background:#0d1b2e;
+  border:1px solid #1a2f47;
+  border-radius:16px;
+  padding:18px 20px;
+  z-index:2;
+  position:relative;
+  transition:border-top-color 0.3s;
+}
 
-  svg { overflow: visible; }
+.info-ring{font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:4px}
+.info-title{font-family:'Playfair Display',serif;font-size:17px;color:#f0f4f8;margin-bottom:7px}
+.info-desc{font-size:12.5px;color:#6b8099;line-height:1.65}
+.info-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.info-tag{padding:2px 9px;border-radius:20px;font-size:9.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
 
-  .tap-hint {
-    text-align: center;
-    font-size: 11px;
-    color: #6b8099;
-    margin-top: 10px;
-    letter-spacing: 1px;
-    z-index: 2;
-    position: relative;
-  }
+.badge{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;z-index:2;position:relative}
+.bdot{width:6px;height:6px;border-radius:50%;background:#00d4b8;animation:pulse 2s ease infinite}
+.btext{font-size:9.5px;font-weight:600;letter-spacing:1.8px;color:#00d4b8;text-transform:uppercase}
+.ftr{text-align:center;font-size:9px;color:#1a2f47;letter-spacing:1px;margin-top:8px;z-index:2;position:relative}
 
-  .info-panel {
-    margin-top: 20px;
-    width: min(520px, 95vw);
-    background: #0d1b2e;
-    border: 1px solid #1a2f47;
-    border-top: 2px solid #d4a843;
-    border-radius: 16px;
-    padding: 20px 22px;
-    z-index: 2;
-    position: relative;
-    transition: all 0.3s ease;
-  }
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes rotateCW{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes rotateCCW{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+@keyframes dash{from{stroke-dashoffset:60}to{stroke-dashoffset:0}}
 
-  .info-label {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-
-  .info-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: #f0f4f8;
-    margin-bottom: 8px;
-  }
-
-  .info-desc {
-    font-size: 13px;
-    color: #6b8099;
-    line-height: 1.65;
-  }
-
-  .info-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 12px;
-  }
-
-  .info-tag {
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  .shield-badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    margin-top: 20px;
-    z-index: 2;
-    position: relative;
-  }
-
-  .shield-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: #00d4b8;
-    animation: pulse 2s ease infinite;
-  }
-
-  .shield-text {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.8px;
-    color: #00d4b8;
-    text-transform: uppercase;
-  }
-
-  .footer-line {
-    margin-top: 10px;
-    font-size: 10px;
-    color: #1a2f47;
-    letter-spacing: 1px;
-    text-align: center;
-    z-index: 2;
-    position: relative;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: 0.4; transform: scale(0.85); }
-  }
-
-  @keyframes rotateCW {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-  }
-
-  @keyframes rotateCCW {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(-360deg); }
-  }
-
-  @keyframes flowDash {
-    from { stroke-dashoffset: 80; }
-    to   { stroke-dashoffset: 0; }
-  }
-
-  @keyframes centerPulse {
-    0%, 100% { r: 72; opacity: 1; }
-    50%       { r: 75; opacity: 0.88; }
-  }
-
-  .ring-cw  { transform-origin: 260px 260px; animation: rotateCW  38s linear infinite; }
-  .ring-ccw { transform-origin: 260px 260px; animation: rotateCCW 26s linear infinite; }
-
-  .arc-arrow {
-    stroke-dasharray: 6 5;
-    animation: flowDash 2.2s linear infinite;
-  }
-
-  .node-btn { cursor: pointer; }
-  .node-btn circle { transition: stroke-width 0.25s, filter 0.25s; }
-  .node-btn:hover circle.outer { filter: drop-shadow(0 0 14px rgba(212,168,67,0.7)); }
+.rcw{transform-origin:280px 280px;animation:rotateCW 45s linear infinite}
+.rcw2{transform-origin:280px 280px;animation:rotateCW 28s linear infinite}
+.rccw{transform-origin:280px 280px;animation:rotateCCW 22s linear infinite}
+.arc-flow{stroke-dasharray:5 5;animation:dash 1.8s linear infinite}
+.node-btn{cursor:pointer}
+.node-btn circle{transition:stroke-width .25s,filter .25s}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="glow-bg"></div>
+  <div class="glow"></div>
 
-  <div class="header">
-    <div class="header-title">Sovereign Shield Flywheel</div>
-    <div class="header-sub">One sovereign infrastructure. Six compounding products.</div>
-    <div class="header-co">Sovereign Shield Technologies LLC &nbsp;|&nbsp; Ada, Oklahoma</div>
+  <div class="hdr">
+    <div class="hdr-title">Sovereign Shield Flywheel</div>
+    <div class="hdr-sub">Governance at the core. Infrastructure in the middle. Products on the outside.</div>
+    <div class="hdr-co">Sovereign Shield Technologies LLC &nbsp;|&nbsp; Ada, Oklahoma</div>
   </div>
 
   <div class="wheel-wrap">
-    <svg id="wheel" viewBox="0 0 520 520" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <svg id="wheel" viewBox="0 0 560 560" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <radialGradient id="bgG" cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stop-color="#d4a843" stop-opacity="0.07"/>
-          <stop offset="100%" stop-color="#00d4b8" stop-opacity="0.02"/>
+          <stop offset="0%" stop-color="#d4a843" stop-opacity="0.06"/>
+          <stop offset="100%" stop-color="#00d4b8" stop-opacity="0.01"/>
         </radialGradient>
-        <filter id="gGold" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="5" result="b"/>
+        <filter id="gGold" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="6" result="b"/>
           <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
-        <filter id="gTeal" x="-50%" y="-50%" width="200%" height="200%">
+        <filter id="gTeal" x="-60%" y="-60%" width="220%" height="220%">
           <feGaussianBlur stdDeviation="4" result="b"/>
           <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
-        <marker id="aGold" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-          <path d="M0,0 L0,6 L6,3 z" fill="#d4a843" opacity="0.7"/>
+        <filter id="gGreen" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="4" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <marker id="aGold" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+          <path d="M0,0 L0,5 L5,2.5 z" fill="#d4a843" opacity="0.8"/>
+        </marker>
+        <marker id="aTeal" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+          <path d="M0,0 L0,5 L5,2.5 z" fill="#00d4b8" opacity="0.7"/>
         </marker>
       </defs>
 
-      <!-- Background fill -->
-      <circle cx="260" cy="260" r="230" fill="url(#bgG)"/>
+      <!-- Background -->
+      <circle cx="280" cy="280" r="260" fill="url(#bgG)"/>
 
-      <!-- Rotating rings -->
-      <g class="ring-cw">
-        <circle cx="260" cy="260" r="216" fill="none" stroke="#8a6820" stroke-width="0.6" stroke-dasharray="4 9" opacity="0.5"/>
-      </g>
-      <g class="ring-ccw">
-        <circle cx="260" cy="260" r="108" fill="none" stroke="#007a6b" stroke-width="0.5" stroke-dasharray="3 11" opacity="0.4"/>
-      </g>
+      <!-- Rotating ring decorations -->
+      <g class="rcw"><circle cx="280" cy="280" r="248" fill="none" stroke="#8a6820" stroke-width="0.5" stroke-dasharray="3 10" opacity="0.4"/></g>
+      <g class="rcw2"><circle cx="280" cy="280" r="178" fill="none" stroke="#d4a843" stroke-width="0.4" stroke-dasharray="2 8" opacity="0.25"/></g>
+      <g class="rccw"><circle cx="280" cy="280" r="108" fill="none" stroke="#007a6b" stroke-width="0.4" stroke-dasharray="2 8" opacity="0.3"/></g>
 
-      <!-- Orbit track -->
-      <circle cx="260" cy="260" r="175" fill="none" stroke="#1a2f47" stroke-width="1" opacity="0.8"/>
+      <!-- Orbit tracks -->
+      <circle cx="280" cy="280" r="195" fill="none" stroke="#1a2f47" stroke-width="1" opacity="0.7"/>
+      <circle cx="280" cy="280" r="120" fill="none" stroke="#1a2f47" stroke-width="0.8" opacity="0.5"/>
 
-      <!-- Arc flow arrows between nodes (drawn as curved paths) -->
-      <g id="arcs"></g>
+      <!-- Outer arc flow arrows -->
+      <g id="outer-arcs"></g>
+      <!-- Inner arc flow arrows -->
+      <g id="inner-arcs"></g>
+      <!-- Spokes outer -->
+      <g id="outer-spokes"></g>
+      <!-- Spokes inner -->
+      <g id="inner-spokes"></g>
+      <!-- Flow labels -->
+      <g id="flow-labels"></g>
+      <!-- Outer nodes -->
+      <g id="outer-nodes"></g>
+      <!-- Inner nodes -->
+      <g id="inner-nodes"></g>
 
-      <!-- Spokes -->
-      <g id="spokes"></g>
-
-      <!-- Nodes -->
-      <g id="nodes"></g>
-
-      <!-- CENTER SHIELD -->
-      <g id="center-node" class="node-btn" onclick="selectNode('shield')">
-        <circle cx="260" cy="260" r="84" fill="none" stroke="#d4a843" stroke-width="0.8" opacity="0.2"/>
-        <circle id="shield-ring" cx="260" cy="260" r="72" fill="#040c17" stroke="#d4a843" stroke-width="2" class="outer" filter="url(#gGold)"/>
-        <text x="260" y="248" text-anchor="middle" font-size="26" fill="#d4a843" font-family="Georgia">⬡</text>
-        <text x="260" y="264" text-anchor="middle" font-size="8.5" fill="#d4a843" font-family="Outfit" font-weight="700" letter-spacing="1">SOVEREIGN</text>
-        <text x="260" y="275" text-anchor="middle" font-size="8.5" fill="#d4a843" font-family="Outfit" font-weight="700" letter-spacing="1">PROMPT SHIELD</text>
-        <text x="260" y="286" text-anchor="middle" font-size="8"   fill="#d4a843" font-family="Outfit" font-weight="600" letter-spacing="0.5" opacity="0.8">v5 · USPTO PATENT PENDING</text>
+      <!-- CENTER: AILT -->
+      <g id="center-node" class="node-btn" onclick="selectNode('ailt')">
+        <circle cx="280" cy="280" r="86" fill="none" stroke="#d4a843" stroke-width="0.8" opacity="0.15"/>
+        <circle id="ailt-ring" cx="280" cy="280" r="74" fill="#040c17" stroke="#d4a843" stroke-width="2.5" filter="url(#gGold)"/>
+        <text x="280" y="261" text-anchor="middle" font-size="11" fill="#d4a843" font-family="Outfit" font-weight="700" letter-spacing="2">AILT</text>
+        <text x="280" y="274" text-anchor="middle" font-size="8" fill="#d4a843" font-family="Outfit" font-weight="600" letter-spacing="1" opacity="0.9">LEADERSHIP</text>
+        <text x="280" y="285" text-anchor="middle" font-size="8" fill="#d4a843" font-family="Outfit" font-weight="600" letter-spacing="1" opacity="0.9">GOVERNANCE</text>
+        <text x="280" y="298" text-anchor="middle" font-size="7" fill="#8a6820" font-family="Outfit" letter-spacing="0.5">Sovereignty Theory</text>
+        <text x="280" y="309" text-anchor="middle" font-size="7" fill="#8a6820" font-family="Outfit" letter-spacing="0.5">Published · Doctoral</text>
       </g>
     </svg>
   </div>
 
-  <div class="tap-hint">Click any node to explore</div>
+  <div class="tap-hint">Tap any node to explore the flywheel</div>
 
-  <div class="info-panel" id="info-panel">
-    <div class="info-label" id="info-label" style="color:#d4a843">Core Infrastructure</div>
-    <div class="info-title" id="info-title">Sovereign Prompt Shield v5</div>
-    <div class="info-desc"  id="info-desc">The engine of everything. AES-256-GCM encryption, real-time SSN and PHI blocking across all 18 HIPAA identifiers, append-only audit log, and zero-knowledge architecture. Provisional patent filed at USPTO. Powers all six products as shared sovereign infrastructure that compounds with every new product deployed.</div>
-    <div class="info-tags"  id="info-tags"></div>
+  <div class="info" id="info-panel" style="border-top:2px solid #d4a843">
+    <div class="info-ring" id="info-ring" style="color:#d4a843">Governance Core</div>
+    <div class="info-title" id="info-title">AILT — Adaptive Inclusive Leadership Theory</div>
+    <div class="info-desc" id="info-desc">The philosophical and governance foundation of everything Sovereign Shield builds. AILT sits at the center because no one else has it. It is the doctoral work, the lived Chickasaw experience, and the published manuscript that makes this company impossible to copy. AILT governs how sovereign AI is built, deployed, and protected. Every product in this flywheel is an expression of AILT principles applied to technology.</div>
+    <div class="info-tags" id="info-tags"></div>
   </div>
 
-  <div class="shield-badge">
-    <div class="shield-dot"></div>
-    <span class="shield-text">ZK Shield Active &nbsp;·&nbsp; AES-256-GCM &nbsp;·&nbsp; Sovereign Infrastructure</span>
-  </div>
-
-  <div class="footer-line">Sovereign Shield Technologies LLC &nbsp;|&nbsp; Confidential &nbsp;|&nbsp; Matthew Culwell, Founder &nbsp;|&nbsp; Ada, Oklahoma</div>
+  <div class="badge"><div class="bdot"></div><span class="btext">Sovereign Shield Active &nbsp;·&nbsp; AES-256-GCM &nbsp;·&nbsp; USPTO Patent Pending</span></div>
+  <div class="ftr">Sovereign Shield Technologies LLC &nbsp;|&nbsp; Confidential &nbsp;|&nbsp; Matthew Culwell, Founder</div>
 </div>
 
 <script>
-const CX = 260, CY = 260, OR = 175, NR = 46, CR = 72;
+const CX = 280, CY = 280;
+const OR = 195; // outer orbit radius
+const IR = 120; // inner orbit radius
+const ONR = 42; // outer node radius
+const INR = 32; // inner node radius
+const CR  = 74; // center radius
 
-const NODES = [
+// INNER RING -- Infrastructure
+const INNER = [
   {
-    id: "healthos", label: ["Sovereign","Health OS"], sub: "LIVE",
-    color: "#00d4b8", icon: "⊕", angle: 270,
-    title: "Sovereign Health OS",
-    labelLine: "Core Infrastructure",
-    desc: "The flagship platform. AI health insights, AES-256-GCM encrypted onboarding, Chickasaw meal plans, AI workout plans, clinical dashboard, and the sovereign health LLM trained to 97.78% accuracy on 41,000+ training pairs. Live at sovereignhealthcareos.com.",
-    tags: ["sovereignhealthcareos.com","LLM 97.78% Accuracy","41,000+ Training Pairs","Chickasaw Nation"],
-    tagColor: "#00d4b8", tagBg: "rgba(0,212,184,0.12)"
+    id: "shield", label: ["Sovereign","Prompt Shield"], sub: "v5 · PATENT",
+    color: "#d4a843", angle: 270,
+    ring: "Infrastructure Layer",
+    title: "Sovereign Prompt Shield v5",
+    desc: "The technical expression of AILT governance. AES-256-GCM encryption, real-time blocking of all 18 HIPAA identifiers and SSNs, append-only audit log, zero-knowledge architecture. Provisional patent filed at USPTO. Powers all seven outer products as shared sovereign infrastructure. Every rotation of the flywheel runs through Shield.",
+    tags: ["USPTO Patent Pending","AES-256-GCM","Zero-Knowledge","Shared Infrastructure"],
+    tc:"#d4a843", tb:"rgba(212,168,67,0.15)"
   },
   {
-    id: "careiq", label: ["CareIQ OS"], sub: "LIVE",
-    color: "#00d4b8", icon: "◎", angle: 330,
-    title: "CareIQ OS",
-    labelLine: "Product Layer",
-    desc: "FQHC-focused sovereign health platform. Clinical intelligence for the safety net. Serves 1,600+ FQHCs and 30M community health patients. FQHC pricing: Small $24K/yr, Mid $48K/yr, Large $96K/yr. RPM add-on $155 per patient per month.",
-    tags: ["care-iq-sable.vercel.app","1,600+ FQHCs","30M Patients","$48K/yr Mid Contract"],
-    tagColor: "#00d4b8", tagBg: "rgba(0,212,184,0.12)"
-  },
-  {
-    id: "longevity", label: ["LongevityIQ","Spa"], sub: "FRANCHISE",
-    color: "#e8a020", icon: "◈", angle: 30,
-    title: "LongevityIQ Spa Franchise",
-    labelLine: "Revenue Layer",
-    desc: "Sovereign wellness franchise for rural Oklahoma and Indian Country. Non-clinical launch: infrared sauna, cold plunge, red light therapy, breathwork, compression. $8K-$22K startup per location. Scales across 74 Oklahoma counties and 574 federally recognized tribes nationwide.",
-    tags: ["Franchise Model","Rural Oklahoma","$8K-$22K Launch Capital","574 Tribes TAM"],
-    tagColor: "#e8a020", tagBg: "rgba(232,160,32,0.12)"
-  },
-  {
-    id: "carecircle", label: ["CareCircle"], sub: "LIVE",
-    color: "#3ecf8e", icon: "◉", angle: 90,
-    title: "CareCircle",
-    labelLine: "Product Layer",
-    desc: "Elder care family coordination platform. Two editions: FQHC and Sovereign. Invite code family model with emergency SMS alerts via Twilio. Keeps elder health data sovereign and within the family. Architecturally separate from CareIQ -- not every user has elders to monitor.",
-    tags: ["carecircleos.vercel.app","Elder Care","Twilio Emergency SMS","FQHC + Sovereign Editions"],
-    tagColor: "#3ecf8e", tagBg: "rgba(62,207,142,0.12)"
-  },
-  {
-    id: "eduiq", label: ["EduIQ"], sub: "LIVE",
-    color: "#3ecf8e", icon: "◆", angle: 150,
-    title: "EduIQ",
-    labelLine: "Product Layer",
-    desc: "Child mental health early warning system. Standalone behavioral health screening platform for school-adjacent early intervention. Fills a critical gap in rural Oklahoma and tribal education systems where mental health resources are severely underfunded.",
-    tags: ["eduiq.vercel.app","Child Mental Health","Early Warning System","School-Adjacent"],
-    tagColor: "#3ecf8e", tagBg: "rgba(62,207,142,0.12)"
-  },
-  {
-    id: "llm", label: ["Sovereign","Health LLM"], sub: "97.78% ACC",
-    color: "#d4a843", icon: "◐", angle: 210,
+    id: "healthllm", label: ["Sovereign","Health LLM"], sub: "97.78% ACC",
+    color: "#00d4b8", angle: 30,
+    ring: "Infrastructure Layer",
     title: "Sovereign Health LLM",
-    labelLine: "AI Infrastructure",
-    desc: "Fine-tuned sovereign health language model. 97.78% accuracy, loss 0.1143, trained on 41,000+ curated pairs. Built on Llama 3.2 3B via Azure ML. Hosted on Hugging Face at SovereignShieldTechnologiesLLC/sovereign-health-llama-3.2-3b. Powers AI health insights across all products.",
-    tags: ["97.78% Accuracy","Loss 0.1143","41,000+ Training Pairs","Azure ML · Llama 3.2 3B"],
-    tagColor: "#d4a843", tagBg: "rgba(212,168,67,0.15)"
+    desc: "Fine-tuned health intelligence model. 97.78% accuracy, loss 0.1143, trained on 41,000+ curated pairs via Azure ML. Built on Llama 3.2 3B. Powers AI health insights, clinical recommendations, and protocol generation across all health products. Gets smarter with every patient interaction.",
+    tags: ["97.78% Accuracy","41,000+ Training Pairs","Azure ML","Llama 3.2 3B"],
+    tc:"#00d4b8", tb:"rgba(0,212,184,0.12)"
+  },
+  {
+    id: "cfm", label: ["Chikashshanompa","CFM"], sub: "LANGUAGE MODEL",
+    color: "#e8a020", angle: 150,
+    ring: "Infrastructure Layer",
+    title: "Chikashshanompa Foundation Model",
+    desc: "The sovereign language model for Chikashshanompa. PEFT LoRA fine-tuned on Llama 3.1 8B. Trained on greetings, governance, sovereignty, medical terminology, ceremonial language, verb conjugations, and more. The only AI model built to preserve and extend the Chickasaw language. A cultural and technical asset with no equivalent anywhere.",
+    tags: ["Chikashshanompa","PEFT LoRA","Llama 3.1 8B","Language Sovereignty"],
+    tc:"#e8a020", tb:"rgba(232,160,32,0.12)"
   },
 ];
 
-const SHIELD = {
-  id: "shield",
-  title: "Sovereign Prompt Shield v5",
-  labelLine: "Core Infrastructure",
-  desc: "The engine of everything. AES-256-GCM encryption, real-time SSN and PHI blocking across all 18 HIPAA identifiers, append-only audit log, and zero-knowledge architecture. Provisional patent filed at USPTO. Powers all six products as shared sovereign infrastructure that compounds with every new product deployed.",
-  tags: ["USPTO Patent Pending","AES-256-GCM","HIPAA-Aligned","Zero-Knowledge","Append-Only Audit"],
-  tagColor: "#d4a843", tagBg: "rgba(212,168,67,0.15)"
+// OUTER RING -- Products
+const OUTER = [
+  {
+    id: "healthos", label: ["Sovereign","Health OS"], sub: "LIVE",
+    color: "#00d4b8", angle: 270,
+    ring: "Product Layer",
+    title: "Sovereign Health OS",
+    desc: "The flagship health platform. AI health insights, AES-256-GCM encrypted onboarding, Chickasaw meal plans, AI workout plans, clinical dashboard. Live at sovereignhealthcareos.com. First proof that the sovereign health LLM works in production.",
+    tags: ["sovereignhealthcareos.com","Live","Chickasaw Nation","Clinical Dashboard"],
+    tc:"#00d4b8", tb:"rgba(0,212,184,0.12)"
+  },
+  {
+    id: "careiq", label: ["CareIQ OS"], sub: "LIVE · FQHC",
+    color: "#00d4b8", angle: 318,
+    ring: "Product Layer",
+    title: "CareIQ OS",
+    desc: "FQHC-focused sovereign health platform. Clinical intelligence for the safety net. 1,600+ FQHCs nationwide, 30M patients. Pricing: Small $24K/yr, Mid $48K/yr, Large $96K/yr. RPM add-on $155 per patient per month.",
+    tags: ["care-iq-sable.vercel.app","1,600+ FQHCs","30M Patients","$48K/yr"],
+    tc:"#00d4b8", tb:"rgba(0,212,184,0.12)"
+  },
+  {
+    id: "longevity", label: ["LongevityIQ","Spa"], sub: "FRANCHISE",
+    color: "#e8a020", angle: 6,
+    ring: "Product Layer",
+    title: "LongevityIQ Spa Franchise",
+    desc: "Sovereign wellness franchise for rural Oklahoma and Indian Country. Non-clinical launch: sauna, cold plunge, red light, breathwork. $8K-$22K per location. Clinical licensing stream for IV, NAD+, peptides via licensed partners. Scales to 74 OK counties and 574 tribes.",
+    tags: ["Franchise Model","Rural Oklahoma","574 Tribes TAM","Clinical Licensing"],
+    tc:"#e8a020", tb:"rgba(232,160,32,0.12)"
+  },
+  {
+    id: "carecircle", label: ["CareCircle"], sub: "LIVE",
+    color: "#3ecf8e", angle: 54,
+    ring: "Product Layer",
+    title: "CareCircle",
+    desc: "Elder care family coordination. Two editions: FQHC and Sovereign. Invite code family model with emergency SMS alerts via Twilio. Keeps elder health data sovereign and within the family. Architecturally separate from CareIQ.",
+    tags: ["carecircleos.vercel.app","Elder Care","Twilio SMS","FQHC + Sovereign"],
+    tc:"#3ecf8e", tb:"rgba(62,207,142,0.12)"
+  },
+  {
+    id: "eduiq", label: ["EduIQ"], sub: "LIVE",
+    color: "#3ecf8e", angle: 126,
+    ring: "Product Layer",
+    title: "EduIQ",
+    desc: "Child mental health early warning system. School-adjacent behavioral health screening for early intervention. Fills a critical gap in rural Oklahoma and tribal education systems where mental health resources are severely underfunded.",
+    tags: ["eduiq.vercel.app","Child Mental Health","Early Warning","School-Adjacent"],
+    tc:"#3ecf8e", tb:"rgba(62,207,142,0.12)"
+  },
+  {
+    id: "languageos", label: ["Language OS"], sub: "LIVE",
+    color: "#e8a020", angle: 174,
+    ring: "Product Layer",
+    title: "Chikasha AI Language OS",
+    desc: "Sovereign language preservation platform. Powered by the Chikashshanompa CFM. Vocabulary, grammar, ceremonial language, governance terminology. Live at chikashaailanguageos.vercel.app. The only AI-powered Chickasaw language learning platform in existence.",
+    tags: ["chikashaailanguageos.vercel.app","Language Preservation","Chikashshanompa","Sovereign Culture"],
+    tc:"#e8a020", tb:"rgba(232,160,32,0.12)"
+  },
+  {
+    id: "chikashaai", label: ["Chikasha","AI OS"], sub: "LIVE",
+    color: "#d4a843", angle: 222,
+    ring: "Product Layer",
+    title: "Chikasha AI OS",
+    desc: "The unified sovereign AI platform. Brings together health intelligence, language preservation, and sovereign data governance under one roof. The public face of the entire Sovereign Shield ecosystem. Live at chikasha-ai.vercel.app.",
+    tags: ["chikasha-ai.vercel.app","Unified Platform","Sovereign AI","Chickasaw Nation"],
+    tc:"#d4a843", tb:"rgba(212,168,67,0.15)"
+  },
+];
+
+// AILT center node data
+const AILT = {
+  id:"ailt", ring:"Governance Core", tc:"#d4a843", tb:"rgba(212,168,67,0.15)",
+  title:"AILT — Adaptive Inclusive Leadership Theory",
+  desc:"The philosophical and governance foundation of everything Sovereign Shield builds. AILT sits at the center because no one else has it. It is the doctoral work, the lived Chickasaw experience, and the published manuscript that makes this company impossible to copy. AILT governs how sovereign AI is built, deployed, and protected. Every product in this flywheel is an expression of AILT principles applied to technology.",
+  tags:["Doctoral Research","Amazon KDP Published","7 Leadership Constructs","Sovereignty Theory","IAC · PS · ECF"]
 };
 
-const svgNS = "http://www.w3.org/2000/svg";
+// Outer flow labels -- what moves between outer products
+const OUTER_FLOWS = [
+  "Patient Data","Revenue","Training Data","Family Data","Community Data","Cultural Data","Sovereign IP"
+];
 
-function toXY(deg, r) {
+// Inner flow labels -- what moves between infrastructure nodes
+const INNER_FLOWS = [
+  "Governance","Language Data","Health Data"
+];
+
+const svgNS = "http://www.w3.org/2000/svg";
+function el(tag, attrs){
+  const e = document.createElementNS(svgNS, tag);
+  Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));
+  return e;
+}
+
+function toXY(deg, r){
   const rad = ((deg - 90) * Math.PI) / 180;
   return { x: CX + r * Math.cos(rad), y: CY + r * Math.sin(rad) };
 }
 
-function makeSVGEl(tag, attrs) {
-  const el = document.createElementNS(svgNS, tag);
-  Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
-  return el;
+function arcBetween(a1, a2, r, pull){
+  const p1 = toXY(a1, r);
+  const p2 = toXY(a2, r);
+  const mx = (p1.x+p2.x)/2, my = (p1.y+p2.y)/2;
+  const dx = mx-CX, dy = my-CY;
+  const len = Math.sqrt(dx*dx+dy*dy)||1;
+  const cx2 = mx - dx/len*(pull||30);
+  const cy2 = my - dy/len*(pull||30);
+  return { d:`M ${p1.x} ${p1.y} Q ${cx2} ${cy2} ${p2.x} ${p2.y}`, cx2, cy2 };
 }
 
-// Draw spokes
-const spokesG = document.getElementById("spokes");
-NODES.forEach(n => {
-  const inner = toXY(n.angle, CR + 4);
-  const outer = toXY(n.angle, OR - NR - 2);
-  const line = makeSVGEl("line", {
-    x1: inner.x, y1: inner.y, x2: outer.x, y2: outer.y,
-    stroke: "#1a2f47", "stroke-width": "0.8",
-    "stroke-dasharray": "3 5", opacity: "0.5",
-    id: `spoke-${n.id}`
-  });
-  spokesG.appendChild(line);
+function drawFlowLabel(parent, cx2, cy2, text, color){
+  const pushDist = 18;
+  const dx = cx2-CX, dy = cy2-CY;
+  const len = Math.sqrt(dx*dx+dy*dy)||1;
+  const lx = cx2 + dx/len*pushDist;
+  const ly = cy2 + dy/len*pushDist;
+  const tw = text.length * 4.2;
+
+  const pill = el("rect",{ x:lx-tw/2-3, y:ly-7, width:tw+6, height:13, rx:6,
+    fill:"#040c17", stroke:color, "stroke-width":"0.6", opacity:"0.9" });
+  parent.appendChild(pill);
+
+  const t = el("text",{ x:lx, y:ly+3.5, "text-anchor":"middle",
+    "font-size":"6.5", fill:color, "font-family":"Outfit",
+    "font-weight":"600", "letter-spacing":"0.3", opacity:"0.95" });
+  t.textContent = text;
+  parent.appendChild(t);
+}
+
+// ── DRAW OUTER ARCS ──────────────────────────
+const outerArcsG  = document.getElementById("outer-arcs");
+const flowLabelsG = document.getElementById("flow-labels");
+OUTER.forEach((n, i) => {
+  const next = OUTER[(i+1) % OUTER.length];
+  const r = OR - ONR - 3;
+  const { d, cx2, cy2 } = arcBetween(n.angle, next.angle, r, 32);
+  const path = el("path",{ d, fill:"none", stroke:"#d4a843", "stroke-width":"1.1",
+    opacity:"0.25", "stroke-dasharray":"5 5", "marker-end":"url(#aGold)",
+    class:"arc-flow", style:`animation-delay:${i*0.28}s` });
+  outerArcsG.appendChild(path);
+  drawFlowLabel(flowLabelsG, cx2, cy2, OUTER_FLOWS[i], "#d4a843");
 });
 
-// Draw arc arrows
-const arcsG = document.getElementById("arcs");
-NODES.forEach((n, i) => {
-  const next = NODES[(i + 1) % NODES.length];
-  const p1 = toXY(n.angle, OR - NR - 4);
-  const p2 = toXY(next.angle, OR - NR - 4);
-  const mx = (p1.x + p2.x) / 2;
-  const my = (p1.y + p2.y) / 2;
-  const dx = mx - CX, dy = my - CY;
-  const len = Math.sqrt(dx*dx + dy*dy) || 1;
-  const cx2 = mx - dx/len * 28;
-  const cy2 = my - dy/len * 28;
-  const d = `M ${p1.x} ${p1.y} Q ${cx2} ${cy2} ${p2.x} ${p2.y}`;
-  const path = makeSVGEl("path", {
-    d, fill: "none", stroke: "#d4a843", "stroke-width": "1.2",
-    opacity: "0.22", "stroke-dasharray": "6 5",
-    "marker-end": "url(#aGold)",
-    class: "arc-arrow",
-    style: `animation-delay: ${i * 0.36}s`
-  });
-  arcsG.appendChild(path);
+// ── DRAW INNER ARCS ──────────────────────────
+const innerArcsG = document.getElementById("inner-arcs");
+INNER.forEach((n, i) => {
+  const next = INNER[(i+1) % INNER.length];
+  const r = IR - INR - 3;
+  const { d, cx2, cy2 } = arcBetween(n.angle, next.angle, r, 20);
+  const path = el("path",{ d, fill:"none", stroke:"#00d4b8", "stroke-width":"0.9",
+    opacity:"0.2", "stroke-dasharray":"4 5", "marker-end":"url(#aTeal)",
+    class:"arc-flow", style:`animation-delay:${i*0.5}s` });
+  innerArcsG.appendChild(path);
+  drawFlowLabel(flowLabelsG, cx2, cy2, INNER_FLOWS[i], "#00d4b8");
 });
 
-// Draw outer nodes
-const nodesG = document.getElementById("nodes");
-NODES.forEach((n, i) => {
-  const pos = toXY(n.angle, OR);
-  const g = makeSVGEl("g", { class: "node-btn", onclick: `selectNode('${n.id}')` });
-
-  // Outer glow ring
-  const glowRing = makeSVGEl("circle", {
-    cx: pos.x, cy: pos.y, r: NR + 9,
-    fill: "none", stroke: n.color, "stroke-width": "0.8",
-    opacity: "0.15", id: `glow-${n.id}`
+// ── DRAW SPOKES outer to inner ────────────────
+const outerSpokesG = document.getElementById("outer-spokes");
+// Each outer node connects to nearest inner node via spoke
+OUTER.forEach(n => {
+  const op = toXY(n.angle, OR - ONR - 2);
+  // Find closest inner node
+  let closest = INNER[0], minDiff = 999;
+  INNER.forEach(inn => {
+    const diff = Math.abs(((n.angle - inn.angle + 540) % 360) - 180);
+    if(diff < minDiff){ minDiff = diff; closest = inn; }
   });
-  g.appendChild(glowRing);
+  const ip = toXY(closest.angle, IR + INR + 2);
+  const line = el("line",{ x1:op.x, y1:op.y, x2:ip.x, y2:ip.y,
+    stroke:"#1a2f47", "stroke-width":"0.7", "stroke-dasharray":"2 5",
+    opacity:"0.4", id:`ospoke-${n.id}` });
+  outerSpokesG.appendChild(line);
+});
 
-  // Main circle
-  const circle = makeSVGEl("circle", {
-    cx: pos.x, cy: pos.y, r: NR,
-    fill: "#0d1b2e", stroke: n.color, "stroke-width": "1.3",
-    class: "outer", id: `circle-${n.id}`
-  });
-  g.appendChild(circle);
+// ── DRAW INNER SPOKES (inner to center) ───────
+const innerSpokesG = document.getElementById("inner-spokes");
+INNER.forEach(n => {
+  const ip = toXY(n.angle, IR - INR - 2);
+  const cp = toXY(n.angle, CR + 2);
+  const line = el("line",{ x1:ip.x, y1:ip.y, x2:cp.x, y2:cp.y,
+    stroke:"#1a2f47", "stroke-width":"0.7", "stroke-dasharray":"2 5",
+    opacity:"0.4", id:`ispoke-${n.id}` });
+  innerSpokesG.appendChild(line);
+});
 
-  // Icon
-  const icon = makeSVGEl("text", {
-    x: pos.x, y: pos.y - 8,
-    "text-anchor": "middle", "font-size": "15",
-    fill: n.color, "font-family": "Georgia"
-  });
-  icon.textContent = n.icon;
-  g.appendChild(icon);
+// ── DRAW INNER NODES ──────────────────────────
+const innerNodesG = document.getElementById("inner-nodes");
+INNER.forEach(n => {
+  const pos = toXY(n.angle, IR);
+  const g = el("g",{ class:"node-btn", onclick:`selectNode('${n.id}')` });
 
-  // Label lines
-  n.label.forEach((line, li) => {
-    const t = makeSVGEl("text", {
-      x: pos.x, y: pos.y + 6 + li * 11,
-      "text-anchor": "middle", "font-size": "8.2",
-      fill: "#6b8099", "font-family": "Outfit",
-      "font-weight": "600", id: `label-${n.id}-${li}`
-    });
+  g.appendChild(el("circle",{ cx:pos.x, cy:pos.y, r:INR+8,
+    fill:"none", stroke:n.color, "stroke-width":"0.7", opacity:"0.12", id:`iglow-${n.id}` }));
+
+  g.appendChild(el("circle",{ cx:pos.x, cy:pos.y, r:INR,
+    fill:"#0d1b2e", stroke:n.color, "stroke-width":"1.3",
+    class:"outer", id:`icircle-${n.id}` }));
+
+  const lines = n.label;
+  lines.forEach((line, li) => {
+    const t = el("text",{ x:pos.x, y:pos.y - (lines.length-1)*5 + li*10,
+      "text-anchor":"middle", "font-size":"7.2", fill:"#6b8099",
+      "font-family":"Outfit", "font-weight":"600", id:`ilabel-${n.id}-${li}` });
     t.textContent = line;
     g.appendChild(t);
   });
 
-  // Sub label
-  const sub = makeSVGEl("text", {
-    x: pos.x, y: pos.y + (n.label.length > 1 ? 30 : 20),
-    "text-anchor": "middle", "font-size": "7.2",
-    fill: n.color, "font-family": "Outfit",
-    "font-weight": "600", opacity: "0.8", "letter-spacing": "0.5"
-  });
+  const sub = el("text",{ x:pos.x, y:pos.y+(lines.length>1?18:12),
+    "text-anchor":"middle", "font-size":"6.2", fill:n.color,
+    "font-family":"Outfit", "font-weight":"600", opacity:"0.85", "letter-spacing":"0.3" });
   sub.textContent = n.sub;
   g.appendChild(sub);
 
-  nodesG.appendChild(g);
+  innerNodesG.appendChild(g);
 });
 
-// Select node logic
-let currentNode = "shield";
+// ── DRAW OUTER NODES ──────────────────────────
+const outerNodesG = document.getElementById("outer-nodes");
+OUTER.forEach(n => {
+  const pos = toXY(n.angle, OR);
+  const g = el("g",{ class:"node-btn", onclick:`selectNode('${n.id}')` });
 
-function selectNode(id) {
-  currentNode = id;
-  const data = id === "shield" ? SHIELD : NODES.find(n => n.id === id);
-  if (!data) return;
+  g.appendChild(el("circle",{ cx:pos.x, cy:pos.y, r:ONR+8,
+    fill:"none", stroke:n.color, "stroke-width":"0.7", opacity:"0.12", id:`oglow-${n.id}` }));
 
-  // Update spoke highlights
-  NODES.forEach(n => {
-    const spoke = document.getElementById(`spoke-${n.id}`);
-    const circle = document.getElementById(`circle-${n.id}`);
-    const glow = document.getElementById(`glow-${n.id}`);
-    const nodeData = NODES.find(x => x.id === n.id);
-    if (spoke) {
-      spoke.setAttribute("stroke", n.id === id ? nodeData.color : "#1a2f47");
-      spoke.setAttribute("stroke-width", n.id === id ? "1.5" : "0.8");
-      spoke.setAttribute("stroke-dasharray", n.id === id ? "none" : "3 5");
-      spoke.setAttribute("opacity", n.id === id ? "0.9" : "0.4");
-    }
-    if (circle) {
-      circle.setAttribute("stroke-width", n.id === id ? "2.5" : "1.3");
-      circle.setAttribute("filter", n.id === id ? "url(#gTeal)" : "none");
-    }
-    if (glow) {
-      glow.setAttribute("opacity", n.id === id ? "0.5" : "0.15");
-    }
-    // Labels
-    nodeData.label.forEach((_, li) => {
-      const lbl = document.getElementById(`label-${n.id}-${li}`);
-      if (lbl) lbl.setAttribute("fill", n.id === id ? "#f0f4f8" : "#6b8099");
-    });
+  g.appendChild(el("circle",{ cx:pos.x, cy:pos.y, r:ONR,
+    fill:"#0d1b2e", stroke:n.color, "stroke-width":"1.2",
+    class:"outer", id:`ocircle-${n.id}` }));
+
+  const lines = n.label;
+  lines.forEach((line, li) => {
+    const t = el("text",{ x:pos.x, y:pos.y - (lines.length-1)*5 + li*10,
+      "text-anchor":"middle", "font-size":"7.5", fill:"#6b8099",
+      "font-family":"Outfit", "font-weight":"600", id:`olabel-${n.id}-${li}` });
+    t.textContent = line;
+    g.appendChild(t);
   });
 
-  // Shield center highlight
-  const shieldRing = document.getElementById("shield-ring");
-  if (id === "shield") {
-    shieldRing.setAttribute("stroke-width", "3");
-    shieldRing.setAttribute("filter", "url(#gGold)");
-  } else {
-    shieldRing.setAttribute("stroke-width", "2");
-    shieldRing.setAttribute("filter", "url(#gGold)");
+  const sub = el("text",{ x:pos.x, y:pos.y+(lines.length>1?20:13),
+    "text-anchor":"middle", "font-size":"6.5", fill:n.color,
+    "font-family":"Outfit", "font-weight":"600", opacity:"0.85", "letter-spacing":"0.3" });
+  sub.textContent = n.sub;
+  g.appendChild(sub);
+
+  outerNodesG.appendChild(g);
+});
+
+// ── SELECT NODE ───────────────────────────────
+let current = "ailt";
+
+function selectNode(id){
+  current = id;
+  let data;
+  if(id === "ailt") data = AILT;
+  else data = INNER.find(n=>n.id===id) || OUTER.find(n=>n.id===id);
+  if(!data) return;
+
+  // Reset all nodes
+  [...INNER, ...OUTER].forEach(n => {
+    const oc = document.getElementById(`ocircle-${n.id}`);
+    const ic = document.getElementById(`icircle-${n.id}`);
+    const og = document.getElementById(`oglow-${n.id}`);
+    const ig = document.getElementById(`iglow-${n.id}`);
+    const c = oc || ic;
+    const g = og || ig;
+    if(c){ c.setAttribute("stroke-width","1.2"); c.removeAttribute("filter"); }
+    if(g){ g.setAttribute("opacity","0.12"); }
+
+    // Reset spokes
+    const os = document.getElementById(`ospoke-${n.id}`);
+    const is2 = document.getElementById(`ispoke-${n.id}`);
+    if(os){ os.setAttribute("stroke","#1a2f47"); os.setAttribute("opacity","0.4"); }
+    if(is2){ is2.setAttribute("stroke","#1a2f47"); is2.setAttribute("opacity","0.4"); }
+
+    // Reset labels
+    const nodeData = INNER.find(x=>x.id===n.id) || OUTER.find(x=>x.id===n.id);
+    if(nodeData){
+      nodeData.label.forEach((_,li) => {
+        const lbl = document.getElementById(`olabel-${n.id}-${li}`) || document.getElementById(`ilabel-${n.id}-${li}`);
+        if(lbl) lbl.setAttribute("fill","#6b8099");
+      });
+    }
+  });
+
+  // Highlight selected
+  const oc = document.getElementById(`ocircle-${id}`);
+  const ic = document.getElementById(`icircle-${id}`);
+  const og = document.getElementById(`oglow-${id}`);
+  const ig = document.getElementById(`iglow-${id}`);
+  const c = oc || ic;
+  const g = og || ig;
+  const filterMap = { "#d4a843":"url(#gGold)", "#00d4b8":"url(#gTeal)", "#e8a020":"url(#gGold)", "#3ecf8e":"url(#gGreen)" };
+  if(c){ c.setAttribute("stroke-width","2.5"); c.setAttribute("filter", filterMap[data.tc]||"url(#gGold)"); }
+  if(g){ g.setAttribute("opacity","0.45"); }
+
+  // Highlight spokes
+  const os = document.getElementById(`ospoke-${id}`);
+  const is2 = document.getElementById(`ispoke-${id}`);
+  if(os){ os.setAttribute("stroke", data.tc); os.setAttribute("opacity","0.8"); }
+  if(is2){ is2.setAttribute("stroke", data.tc); is2.setAttribute("opacity","0.8"); }
+
+  // Highlight labels
+  const nodeData = INNER.find(x=>x.id===id) || OUTER.find(x=>x.id===id);
+  if(nodeData){
+    nodeData.label.forEach((_,li) => {
+      const lbl = document.getElementById(`olabel-${id}-${li}`) || document.getElementById(`ilabel-${id}-${li}`);
+      if(lbl) lbl.setAttribute("fill","#f0f4f8");
+    });
   }
 
+  // AILT center highlight
+  const ailtRing = document.getElementById("ailt-ring");
+  ailtRing.setAttribute("stroke-width", id==="ailt" ? "3" : "2.5");
+
   // Update panel
-  document.getElementById("info-label").textContent  = data.labelLine || "Product Layer";
-  document.getElementById("info-label").style.color   = data.tagColor;
-  document.getElementById("info-title").textContent   = data.title;
-  document.getElementById("info-desc").textContent    = data.desc;
-  document.getElementById("info-panel").style.borderTopColor = data.tagColor;
+  document.getElementById("info-ring").textContent = data.ring || "Product Layer";
+  document.getElementById("info-ring").style.color = data.tc;
+  document.getElementById("info-title").textContent = data.title;
+  document.getElementById("info-desc").textContent = data.desc;
+  document.getElementById("info-panel").style.borderTopColor = data.tc;
 
   const tagsEl = document.getElementById("info-tags");
   tagsEl.innerHTML = "";
-  data.tags.forEach(t => {
+  (data.tags||[]).forEach(t => {
     const span = document.createElement("span");
     span.className = "info-tag";
     span.textContent = t;
-    span.style.background = data.tagBg;
-    span.style.color = data.tagColor;
+    span.style.background = data.tb;
+    span.style.color = data.tc;
     tagsEl.appendChild(span);
   });
 }
 
-// Init with shield selected
-selectNode("shield");
-
-// Subtle center pulse via JS
-const shieldRing = document.getElementById("shield-ring");
-let scale = 0;
-function pulseTick() {
-  scale += 0.04;
-  const r = 72 + Math.sin(scale) * 2.5;
-  shieldRing.setAttribute("r", r.toFixed(1));
+// Center pulse
+const ailtRing = document.getElementById("ailt-ring");
+let tick = 0;
+function pulseTick(){
+  tick += 0.035;
+  const r = 74 + Math.sin(tick) * 2.5;
+  ailtRing.setAttribute("r", r.toFixed(1));
   requestAnimationFrame(pulseTick);
 }
 pulseTick();
+
+// Init
+selectNode("ailt");
 </script>
 </body>
 </html>
